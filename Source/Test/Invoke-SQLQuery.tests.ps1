@@ -1,15 +1,21 @@
 ﻿$VerbosePreference = "Continue"
 
+Import-Module c:\testsql -Force
 
-#Get-Command -Module TestSQL
+Write-Host "G1:"
+Get-Command -Module TestSQL
 
 
 $SQLServer = "localhost"
 $AGListener = "localhost"
 
 Describe "Query Tests For Invoke-SQLQuery" {
-    Import-Module c:\testsql -Force
+    Write-Host "G2:"
+    Get-Command -Module TestSQL
     It "Direct-SQL-Query" {
+        Write-Host "G3:"
+        Get-Command -Module TestSQL
+
         $Query = "SELECT @@version AS Version"
         $Test = Invoke-SQLQuery -Instance $SQLServer -Database Master -Query $Query
         $Test.Version | Should Match "SQL"
