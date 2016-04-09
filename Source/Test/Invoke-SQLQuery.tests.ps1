@@ -1,7 +1,7 @@
 ﻿$VerbosePreference = "Continue"
 
-Import-Module c:\ps.sql -Force
-Get-Command -Module PS.SQL
+Import-Module c:\testsql -Force
+Get-Command -Module TestSQL
 
 
 $SQLServer = "localhost"
