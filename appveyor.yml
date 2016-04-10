@@ -1,5 +1,5 @@
 version: 1.0.{build}
-image: WMF 5
+image: Previous WMF 5
 clone_folder: c:\testsql
 services: mssql2014
 build:
@@ -22,9 +22,9 @@ test_script:
   - ps: if ($res.FailedCount -gt 0) { throw "$($res.FailedCount) tests failed."}
 
 on_success:
-
-  - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
+  - git config --global credential.helper store
   - git config --global user.email "martin@pughspace.com"
   - git config --global user.name "martin9700"
-  - git commit --message "$($ENV:APPVEYOR_BUILD_VERSION) commit [skip ci]"
+  - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
+  - git commit --message "%APPVEYOR_BUILD_VERSION% commit [skip ci]"
   - git push
