@@ -1,4 +1,4 @@
-Import-Module "sqlps"
+Import-Module "sqlps" -DisableNameChecking -ErrorAction SilentlyContinue
 $instanceName = 'sql2014'
 $computerName = $env:COMPUTERNAME
 $smo = 'Microsoft.SqlServer.Management.Smo.'
@@ -9,11 +9,11 @@ $wmi = New-Object ($smo + 'Wmi.ManagedComputer')
 # of 1433.
 $uri = "ManagedComputer[@Name='$computerName']/ ServerInstance[@Name='$instanceName']/ServerProtocol[@Name='Tcp']"
 $Tcp = $wmi.GetSmoObject($uri)
-foreach ($ipAddress in $Tcp.IPAddresses)
+<#foreach ($ipAddress in $Tcp.IPAddresses)
 {
     $ipAddress.IPAddressProperties["TcpDynamicPorts"].Value = ""
     $ipAddress.IPAddressProperties["TcpPort"].Value = "1433"
-}
+}#>
 $Tcp.IsEnabled = $true
 $Tcp.Alter()
 
