@@ -1,21 +1,10 @@
-﻿$VerbosePreference = "Continue"
-
-Import-Module C:\testsql\TestSQL.psm1 -Force
-
-Write-Host "G1:"
-Get-Command -Module TestSQL
-
+﻿Import-Module C:\testsql\TestSQL.psm1 -Force
 
 $SQLServer = "localhost"
 $AGListener = "localhost"
 
 Describe "Query Tests For Invoke-SQLQuery" {
-    Write-Host "G2:"
-    Get-Command -Module TestSQL
     It "Direct-SQL-Query" {
-        Write-Host "G3:"
-        Get-Command -Module TestSQL
-
         $Query = "SELECT @@version AS Version"
         $Test = Invoke-SQLQuery -Instance $SQLServer -Database Master -Query $Query
         $Test.Version | Should Match "SQL"
@@ -25,12 +14,11 @@ Describe "Query Tests For Invoke-SQLQuery" {
         $Test = $Query | Invoke-SQLQuery -Instance $SQLServer -Database Master
         $Test.Version | Should Match "SQL"
     }
-    <#
     It "AG-Listener-MultiSiteFailover-Switch" {
         $Query = "SELECT @@version AS Version"
         $Test = Invoke-SQLQuery -Instance $AGListener -Database Master -Query $Query
         $Test.Version | Should Match "SQL"
-    }#>
+    }
     It "List-Databases" {
         $Test = Invoke-SQLQuery -Instance $SQLServer -ListDatabases | Where Name -eq "master"
         $Test.Name | Should Be "master"
