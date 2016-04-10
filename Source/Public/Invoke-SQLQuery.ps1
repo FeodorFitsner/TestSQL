@@ -173,7 +173,7 @@ Function Invoke-SQLQuery {
             }
             Catch {
                 $SqlConnection.Close()
-                Write-Error $Error[2].Exception.Message
+                Write-Error $Error[1].Exception.Message
                 Continue
             }
             $SqlConnection.Close()
