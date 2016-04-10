@@ -1,5 +1,5 @@
 version: 1.0.{build}
-image: Previous WMF 5
+image: WMF 5
 clone_folder: c:\testsql
 services: mssql2014
 build:
@@ -28,3 +28,6 @@ on_success:
   - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
   - git commit --message "%APPVEYOR_BUILD_VERSION% commit [skip ci]"
   - git push
+
+on_finish:
+  - ps $blockRdp = $true;iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
