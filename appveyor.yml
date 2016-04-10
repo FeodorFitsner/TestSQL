@@ -12,6 +12,8 @@ environment:
   access_token:
     secure: l7GCMr9GpxCMXPM4YnIF6j9ba8N4/L4PrlWziF1s3LNgFtgViKy4Qk9SZM19e2wM
 
+build: off
+test: off
 #build_script:
 #- ps: Update-ModuleManifest -ModuleVersion $ENV:APPVEYOR_BUILD_VERSION -Path c:\testsql\testSQL.psd1
 #- ps: c:\testsql\source\test\Set-AppveyorSQL.ps1
