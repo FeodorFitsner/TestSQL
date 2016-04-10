@@ -7,6 +7,11 @@ build:
 
 install:
   - cinst pester
+
+environment:
+  access_token:
+    secure: l7GCMr9GpxCMXPM4YnIF6j9ba8N4/L4PrlWziF1s3LNgFtgViKy4Qk9SZM19e2wM
+
 build_script:
 - ps: Update-ModuleManifest -ModuleVersion $ENV:APPVEYOR_BUILD_VERSION -Path c:\testsql\testSQL.psd1
 - ps: c:\testsql\source\test\Set-AppveyorSQL.ps1
@@ -16,3 +21,10 @@ test_script:
   - ps: (New-Object 'System.Net.WebClient').UploadFile("https://ci.appveyor.com/api/testresults/nunit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path c:\testsql\TestsResults.xml))
   - ps: if ($res.FailedCount -gt 0) { throw "$($res.FailedCount) tests failed."}
 
+on_success:
+  - git config --global credential.helper store
+  - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
+  - git config --global user.email "martin@pughspace.com"
+  - git config --global user.name "martin9700"
+  - git commit --message "$($ENV:APPVEYOR_BUILD_VERSION) commit [skip ci]"
+  - git push
