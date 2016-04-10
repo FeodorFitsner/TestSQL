@@ -4,10 +4,12 @@ clone_folder: c:\testsql
 services: mssql2014
 build:
   verbosity: minimal
+
 install:
   - cinst pester
 build_script:
 - ps: Update-ModuleManifest -ModuleVersion $ENV:APPVEYOR_BUILD_VERSION -Path c:\testsql\testSQL.psd1
+- ps: c:\testsql\source\test\Set-AppveyorSQL.ps1
 
 test_script:
   - ps: $res = Invoke-Pester -Path "c:\testsql" -OutputFormat NUnitXml -OutputFile TestsResults.xml -PassThru
