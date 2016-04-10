@@ -1,3 +1,4 @@
+Import-Module "sqlps"
 $instanceName = 'sql2014'
 $computerName = $env:COMPUTERNAME
 $smo = 'Microsoft.SqlServer.Management.Smo.'
@@ -19,5 +20,5 @@ $Tcp.Alter()
 # Start services
 Set-Service SQLBrowser -StartupType Manual
 Start-Service SQLBrowser
-Get-Service "MSSQL`$$instanceName"
+#Get-Service "MSSQL`$$instanceName"
 Restart-Service "MSSQL`$$instanceName"
