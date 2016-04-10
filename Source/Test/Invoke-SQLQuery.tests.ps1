@@ -1,6 +1,6 @@
 ﻿$VerbosePreference = "Continue"
 
-Import-Module c:\testsql -Force
+Import-Module C:\testsql\TestSQL.psm1 -Force
 
 Write-Host "G1:"
 Get-Command -Module TestSQL
