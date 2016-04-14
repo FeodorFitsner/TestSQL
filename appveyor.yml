@@ -1,5 +1,5 @@
 version: 1.0.{build}
-#image: WMF 5
+image: WMF 5
 clone_folder: c:\testsql
 services: mssql2014
 
