@@ -1,4 +1,6 @@
-Import-Module "sqlps" -DisableNameChecking -ErrorAction SilentlyContinue 3> $null
+[reflection.assembly]::LoadWithPartialName("Microsoft.SqlServer.Smo") | Out-Null
+[reflection.assembly]::LoadWithPartialName("Microsoft.SqlServer.SqlWmiManagement") | Out-Null
+
 $instanceName = 'sql2014'
 $computerName = $env:COMPUTERNAME
 $smo = 'Microsoft.SqlServer.Management.Smo.'
