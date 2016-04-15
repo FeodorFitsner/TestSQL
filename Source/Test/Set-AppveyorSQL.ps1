@@ -23,3 +23,4 @@ $Tcp.Alter()
 Set-Service SQLBrowser -StartupType Manual
 Start-Service SQLBrowser
 Restart-Service "MSSQL`$$instanceName"
+Get-Service "MSSQL`$$instanceName"
