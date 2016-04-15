@@ -23,7 +23,7 @@ build_script:
 #  - ps: if ($res.FailedCount -gt 0) { throw "$($res.FailedCount) tests failed."}
 
 deploy_script:
-  - ps: Start-Sleep -s 5
+  #- ps: Start-Sleep -s 5
   - git config --global credential.helper store
   - git config --global user.email "martin@pughspace.com"
   - git config --global user.name "martin9700"
