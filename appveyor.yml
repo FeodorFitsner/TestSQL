@@ -1,5 +1,5 @@
 version: 1.0.{build}
-image: WMF 5
+#image: WMF 5
 clone_folder: c:\testsql
 services: mssql2014
 
@@ -14,7 +14,7 @@ environment:
 test: off
 
 build_script:
-- ps: Update-ModuleManifest -ModuleVersion $ENV:APPVEYOR_BUILD_VERSION -Path c:\testsql\testSQL.psd1
+#- ps: Update-ModuleManifest -ModuleVersion $ENV:APPVEYOR_BUILD_VERSION -Path c:\testsql\testSQL.psd1
 - ps: c:\testsql\source\test\Set-AppveyorSQL.ps1
 
 #test_script:
