@@ -2,6 +2,15 @@ version: 1.0.{build}
 clone_folder: c:\testsql
 services: mssql2014
 
+init:
+- ps: $path = 'C:\Program Files\AppVeyor\BuildAgent\Appveyor.BuildAgent.Interactive.exe.config'
+- ps: $xml = [xml](Get-Content $path)
+- ps: $xml.configuration.startup.setAttribute('useLegacyV2RuntimeActivationPolicy', 'true')
+- ps: $xml.Save($path)
+- ps: Start-Sleep -s 2
+- ps: Restart-Computer
+- ps: Start-Sleep -s 2
+
 install:
   - cinst pester
 
